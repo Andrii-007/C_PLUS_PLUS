@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+
+int main()
+{
+double a = 2.0;
+double b = 19.03;
+std::cout <<(4.3*sin(((a/b)+1)*M_PI))/((b/a)-cos(((a/b)-1)*M_PI)+log(b));
+
+double x = 4.0;
+double y = 0.707;
+std::cout<<"\n" <<pow((exp(0.5*((1-cos(y)*M_PI)/(1-sin(x)*M_PI)))+exp(0.3*((1+cos(x)*M_PI)/(1+sin(y)*M_PI)))),(3.0/2.0));
+
+}
