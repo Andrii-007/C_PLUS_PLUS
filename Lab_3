@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+    int x,y,a,z;
+cout<<"Enter a positive three-digit number:";
+cin>>a;
+if (a<0){
+    cout<<"\n"<<"ERROR";
+}
+else{
+x=(a/100);
+y=(a%100)/10;
+z=(a%10);
+
+ int pro=1;
+
+    if(x%2==0) pro*=x;
+    if(y%2==0) pro*=y;
+    if(z%2==0) pro*=z;
+    if(x%2==1 && y%2==1 && z%2==1) pro*=0;
+cout<<"\n"<<"Result is:"<<pro;
+}
+
+
+}
