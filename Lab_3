@@ -8,7 +8,7 @@ int main()
     int x,y,a,z;
 cout<<"Enter a positive three-digit number:";
 cin>>a;
-if (a<0){
+if (a<1000 && a>99 ){
     cout<<"\n"<<"ERROR";
 }
 else{
@@ -25,5 +25,50 @@ z=(a%10);
 cout<<"\n"<<"Result is:"<<pro;
 }
 
+//---------------------------------------------------------------------------------------
 
+int d;
+A1: cout<<"Enter the number that corresponds to the day of the week:";
+cin>>d;
+switch (d) {
+    case 1: cout<<"Mondey"<<"\n"
+            <<"Mathematics"<<"\n"
+            <<"Phisical Education"<<"\n"
+            <<"English language"<<"\n"; 
+            break;   
+    case 2:
+            cout<<"Tuesday"<<"\n"
+            <<"Computer science"<<"\n"
+            <<"Chemistry"<<"\n";
+            break;  
+    case 3: 
+            cout<<"Wednesday"<<"\n"
+            <<"English language"<<"\n"
+            <<"Computer science"<<"\n"
+            <<"Computer science"<<"\n";
+            break;  
+    case 4: 
+            cout<<"Thursday"<<"\n"
+            <<"Phisical Education"<<"\n"
+            <<"Philosophy"<<"\n"
+            <<"WEB development"<<"\n";
+            break;  
+    case 5:
+            cout<<"Fridey"<<"\n"
+            <<"Mathematics"<<"\n"
+            <<"English language"<<"\n";
+            break;  
+    case 6:
+            cout<<"Saturday"<<"\n"
+            <<"No lessons for this day"<<"\n";
+            break;  
+    case 7: 
+            cout<<"Sunday "<<"\n"
+            <<"No lessons for this day"<<"\n";
+            break;  
+    default:{
+        cout<<"There is no such day, try again."<<"\n";
+        goto A1;
+        }
+    }
 }
