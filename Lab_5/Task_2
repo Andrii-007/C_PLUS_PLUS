@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+using namespace std;
+
+int main() {
+      long double x = 1;  
+
+    for (int i = 10; i <= 98; i += 2) { 
+        x *= i;
+    }
+
+    cout << "Product of all two didget even numbers is  = " << x << endl;
+
+}
