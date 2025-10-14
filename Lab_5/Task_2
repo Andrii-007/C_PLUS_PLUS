@@ -4,12 +4,22 @@
 using namespace std;
 
 int main() {
-      long double x = 1;  
+      int x;
+      long int y;
 
-    for (int i = 10; i <= 98; i += 2) { 
-        x *= i;
+    A1:for (int i = 1; i <= 10; i ++) { 
+        cout << "x" << i << " = ";
+        cin >> x;
+        if (x>0){
+        y += x*x;
+        }
+        else{
+        cout << "ERROR"<<endl;
+        y=0;
+        goto A1;
+            }
     }
 
-    cout << "Product of all two didget even numbers is  = " << x << endl;
+    cout << "Summ of all didgets squares  = " << y << endl;
 
 }
