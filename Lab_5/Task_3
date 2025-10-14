@@ -26,7 +26,7 @@ int main() {
     x = a;
     while (x <= b + 1e-9) { 
        
-        y = 1.0 / (pow(x - 4, 2) + 6);
+        y = 1.0 / (pow(x - 4, 2)) + 6;
   
         cout << setw(9) << x << " | " << setw(5) << y << endl;
 
