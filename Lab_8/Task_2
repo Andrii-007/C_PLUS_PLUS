@@ -32,8 +32,8 @@ int a[m];
 while (a[x]!=max){
   if (a[x]<0){
       a[x]=0;
-      x++;
-      }else{x++;}
+      }
+     x++;
     }  
 
 cout<<"Array is:";
