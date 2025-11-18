@@ -1,1 +1,58 @@
-drgth
+#include <iostream>
+#include <string>
+#include<cmath>
+using namespace std;
+
+int main()
+{
+  int m;  
+ 
+ do{
+  cout<<"Enter how big is array:";
+  cin>>m;
+    } while (m==0); 
+
+int a[m]; 
+
+  for(int i = 0; i < m; i++){
+      cout<<"Enter value:";
+      cin>>a[i];
+      }
+
+ int max = a[0];
+ int idmax=0;
+ 
+ for (int i = 0; i < m; i ++) {
+        if (max<a[i]){
+            max=a[i];
+            idmax=i;
+            }
+}
+
+a[idmax]=0;
+
+int secmax = a[0];
+int secidmax=0;
+ 
+ for (int i = 0; i < m; i ++) {
+        if (secmax<a[i]){
+            secmax=a[i];
+            secidmax=i;
+            }
+}
+
+a[idmax]=max;
+
+int t;
+t=a[idmax];
+a[idmax]=a[secidmax];
+a[secidmax]=t;
+
+cout<<"Array is:";
+
+ for (int i = 0; i < m; i++) {
+        cout << a[i] << " ";
+ }
+ 
+}
+
