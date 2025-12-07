@@ -10,7 +10,7 @@ int main()
 int m=4;
 int n=3;
 int i,j;
-int arr[m][n]; 
+int arr[10][10]; 
 srand(time(NULL));
 
 for(i=0;i<m;i++)
@@ -27,10 +27,50 @@ for(i=0;i<m;i++)
     cout << "| Even numbers in row " << i << ": " << evenCount << endl;
 cout << endl;
 }
+cout<<"---------------------------------------------------------------------------------------"<<endl;
 
 
+m=6;
+n=4;
 
 
+for(i=0;i<m;i++)
+{
+    for(j=0;j<n;j++)
+    {
+        arr[i][j]=rand()% 90+10;
+        cout << arr[i][j] << "\t";
+    }
+cout << endl;
+}
+cout << "Even numbers per column:" << endl;
+    for (int j = 0; j < n; j++) { 
+        int evenCount = 0;
+        for (int i = 0; i < m; i++) {
+            if (arr[i][j] % 2 == 0) {
+                evenCount++;
+            }
+        }
+        cout << "Column " << j << ": " << evenCount << endl;
+    }
+    cout << endl;
+cout<<"---------------------------------------------------------------------------------------"<<endl;
+ m=5;
+ n=7;
 
+for(i=0;i<m;i++)
+{
+    int sum = 0;
+    for(j=0;j<n;j++)
+    {
+        arr[i][j]=rand()% 90+10;
+        cout << arr[i][j] << "\t";
+        sum+=arr[i][j];
+        
+    }
+    cout << "| Sum of all nubers in row " << i << "is: " << sum << endl;
+cout << endl;
+}
+cout<<"---------------------------------------------------------------------------------------"<<endl;
 
 }
