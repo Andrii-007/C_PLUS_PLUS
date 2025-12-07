@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+int m=4;
+int n=3;
+int i,j;
+int arr[m][n]; 
+srand(time(NULL));
+
+for(i=0;i<m;i++)
+{
+    int evenCount = 0;
+    for(j=0;j<n;j++)
+    {
+        arr[i][j]=rand()% 90+10;
+        cout << arr[i][j] << "\t";
+        if (arr[i][j] % 2 == 0) {
+                evenCount++;
+            }
+    }
+    cout << "| Even numbers in row " << i << ": " << evenCount << endl;
+cout << endl;
+}
+
+
+
+
+
+
+}
