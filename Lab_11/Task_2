@@ -9,7 +9,6 @@ int main()
 {
 int pasH;
 int pasM;
-double PAS;
 
 struct Date
 {
