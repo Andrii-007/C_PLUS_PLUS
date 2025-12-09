@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+int pasH;
+int pasM;
+double PAS;
+
+struct Date
+{
+int hour;
+int min;
+};
+Date timeA;
+Date timeB;
+
+
+ do{
+cout<<"Enter starting time(HOUR than MINUTE):"<<endl;
+cin>>timeA.hour;
+    } while (timeA.hour < 0 or timeA.hour >= 24);
+ do{
+cin>>timeA.min;
+    } while (timeA.min <0 or timeA.min >= 60);
+
+cout<<timeA.hour<<":"<<timeA.min<<endl;
+
+ do{
+cout<<"Enter end time(HOUR than MINUTE):"<<endl;
+cin>>timeB.hour;
+    } while (timeB.hour < 0 or timeB.hour >= 24);
+ do{
+cin>>timeB.min;
+    } while (timeB.min <0 or timeB.min >= 60);  
+    
+cout<<timeB.hour<<":"<<timeB.min<<endl;
+    
+
+
+pasH=23-timeA.hour+timeB.hour;
+pasM=60-timeA.min+timeB.min;
+
+if(pasM<0)
+{
+pasM=-pasM;
+}
+
+if(pasH<0)
+{
+pasH=-pasH+24;
+}
+cout<<pasH<<":"<<pasM<<endl;
+
+}
