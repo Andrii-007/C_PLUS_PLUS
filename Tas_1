@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include<cmath>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+int pas;
+double PAS;
+struct Date
+{
+int hour;
+int min;
+};
+Date time;
+
+
+
+ do{
+cout<<"Enter starting time(HOUR than MINUTE):"<<endl;
+cin>>time.hour;
+    } while (time.hour < 0 or time.hour >= 24);
+ do{
+cin>>time.min;
+    } while (time.min <0 or time.min >= 60);
+    
+    
+cout<<time.hour<<":"<<time.min<<endl;
+    
+cout<<"Enter how much time paseed (MINUTES):"<<endl;
+cin>>pas;
+PAS=pas;
+
+time.hour+=pas/60;
+time.min+=((PAS/60)-(pas/60))*60;
+
+if(time.min>=60)
+{
+time.min=time.min-60;
+time.hour++;
+}
+
+if(time.hour>=24)
+{
+time.hour=time.hour-24;
+}
+cout<<time.hour<<":"<<time.min<<endl;
+
+}
