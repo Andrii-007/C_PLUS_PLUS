@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 int pas;
-double PAS;
+
 struct Date
 {
 int hour;
@@ -31,9 +31,9 @@ cout<<time.hour<<":"<<time.min<<endl;
     
 cout<<"Enter how much time paseed (MINUTES):"<<endl;
 cin>>pas;
-PAS=pas;
+
 time.hour+=pas/60;
-time.min+=((PAS/60)-(pas/60))*60;
+time.min+=pas%60;
 
 if(time.min>=60)
 {
@@ -41,7 +41,7 @@ time.min=time.min-60;
 time.hour++;
 }
 
-if(time.hour>=24)
+while(time.hour>=24)
 {
 time.hour=time.hour-24;
 }
