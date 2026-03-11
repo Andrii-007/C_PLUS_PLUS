@@ -9,16 +9,16 @@ int main()
 {
 float *arr = new float [5];
 int min=-2, max=2;
-int even=0, odd=0;
+int negative=0, positive=0;
  srand(time(NULL));
  for (int i = 0; i < 5; i++) {
    arr[i] = min+(max-min)*(rand() % 101)/100.0;
    cout<<fixed<<setprecision(2)<<arr[i]<<"  ";
-   if(arr[i]<0) odd++;
-   else even++;
+   if(arr[i]<0) negative++;
+   else positive++;
 }
-cout<<endl<<"Amount of odd numbers: "<<odd<<endl;
-cout<<"Amount of even numbers: "<<even;
+cout<<endl<<"Amount of positive numbers: "<<positive<<endl;
+cout<<"Amount of negative numbers: "<<negative;
 
 delete [] arr;
 
