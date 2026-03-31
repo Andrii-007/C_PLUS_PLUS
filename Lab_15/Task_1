@@ -6,14 +6,11 @@
 using namespace std;
 
 bool isLeap(int year) {
-    float result;
-        if(year%4==0 && year % 100 != 0) || (year % 400 == 0){
-            result=true;
-            return result;
+        if(year%4==0 && year % 100 != 0 or year % 400 == 0){
+            return true;
         }
         else{
-           result=false;
-           return result;
+           return false;
         }
 }
 int main(void) {
