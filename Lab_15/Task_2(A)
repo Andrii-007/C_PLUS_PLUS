@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+bool isLeap(int year) {
+float result;
+        if(year%4==0){
+            result=true;
+            return result;
+        }
+        else{
+           result=false;
+           return result;
+        }
+}
+int main(void) {
+for(int yr = 2000; yr < 2002; yr++) {
+    switch(isLeap(yr)){
+        case false:
+            cout<<"31 28 31 30 31 30 31 31 30 31 30 31";
+            cout<<endl;
+            break;
+        case true:
+            cout<<"31 29 31 30 31 30 31 31 30 31 30 31";
+            cout<<endl;
+            break;
+    }
+return 0;
+}
