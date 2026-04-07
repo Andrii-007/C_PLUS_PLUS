@@ -1,7 +1,5 @@
 #include <iostream>
 #include <ctime>
-using namespace std;
-
 #include <iostream>
 
 using namespace std;
@@ -26,9 +24,9 @@ Date today(void) {
 
 Date birthday(void) {
     Date d; 
-    d.year = 2007; 
-    d.month = 6;
-    d.day = 26;
+    d.year ; 
+    d.month;
+    d.day;
 
     return d; 
 }
@@ -66,6 +64,8 @@ int main(void) {
     cout << t.year << "-" << t.month << "-" << t.day << endl;
     
     Date n = birthday();
+    cin>>n.year>>n.month>>n.day;
+    cout<<endl;
     cout << n.year << "-" << n.month << "-" << n.day << endl;
 
 
