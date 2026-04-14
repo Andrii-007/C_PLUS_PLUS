@@ -22,12 +22,9 @@ Date today(void) {
     return d; 
 }
 
-Date birthday(void) {
+Date birthday(void) {    
     Date d; 
-    d.year ; 
-    d.month;
-    d.day;
-
+    cin>>d.year>>d.month>>d.day;
     return d; 
 }
 
@@ -63,27 +60,41 @@ int main(void) {
     Date t = today();
     cout << t.year << "-" << t.month << "-" << t.day << endl;
     
-    Date n = birthday();
-    cin>>n.year>>n.month>>n.day;
     cout<<endl;
-    cout << n.year << "-" << n.month << "-" << n.day << endl;
+    
+    Date b = birthday();
+    cout << b.year << "-" << b.month << "-" << b.day << endl;
 
 
 int days=0;
- for (int yr = n.year+1; yr < t.year; yr++) {
+if(b.year!=t.year){
+for (int yr = b.year+1; yr < t.year; yr++) {
         for (int mo = 1; mo <= 12; mo++) {
-            days=days+monthLength(yr, mo);
+            days+=monthLength(yr, mo);
         }
     }
-
-for (int mo = n.month+1; mo <= 12; mo++) {
-            days=days+monthLength(n.year, mo);
+    
+for (int mo = b.month+1; mo <= 12; mo++) {
+            days+=monthLength(b.year, mo);
         }
-        
+   
 for (int mo = 1; mo < t.month; mo++) {
-             days=days+monthLength(t.year, mo);
-         }
-days=days+t.day+(monthLength(n.year, n.month)-n.day)+1;       
+             days+=monthLength(t.year, mo);
+        }
+
+days+=t.day+(monthLength(b.year, b.month)-b.day)+1; 
+
+}else if(b.month!=t.month){
+    
+   for (int mo = b.month + 1; mo < t.month; mo++) {
+            days += monthLength(b.year, mo);
+    }
+days += monthLength(b.year, b.month) - b.day + t.day+1; 
+
+}else{
+days=t.day-b.day+1;
+}
+
 cout<<endl;
 cout<<days;
 return 0;
