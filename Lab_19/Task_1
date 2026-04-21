@@ -1,0 +1,41 @@
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <cctype>
+using namespace std;
+
+int main()
+{
+string password;
+getline(cin, password);
+
+bool hasUpper = any_of(password.begin(), password.end(), ::isupper);
+bool hasDigit = any_of(password.begin(), password.end(), ::isdigit);
+bool hasPunct = any_of(password.begin(), password.end(), ::ispunct);
+
+int error=0;
+if(password.size()<8){
+cout<<"The password must be 8 characters long"<<endl;
+error++;
+}
+
+if(hasUpper==false){
+cout<<"The password must have at least one upper case letter"<<endl;
+error++;
+}
+
+if(hasDigit==false){
+cout<<"The password must have at least one digit"<<endl;
+error++;
+}
+
+if(hasPunct==false){
+cout<<"The password must have at least one special character"<<endl;
+error++;
+}
+
+if(error==0){
+cout<<"The password is valid"<<endl;
+}
+return 0;
+}
