@@ -1,0 +1,136 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <sstream>
+
+using namespace std;
+
+class FlightBooking {
+public:
+    FlightBooking();
+    FlightBooking(int id, int capacity, int reserved);
+    void printStatus();
+    bool reserveSeats(int number_of_seats);
+    bool cancelReservations(int number_of_seats);
+    int getId() { return id; }
+private:
+    int id;
+    int capacity;
+    int reserved;
+};
+
+FlightBooking::FlightBooking() {
+    id = 0; capacity = 0; reserved = 0;
+}
+
+FlightBooking::FlightBooking(int id, int capacity, int reserved) {
+    this->id = id;
+    this->capacity = (capacity > 0) ? capacity : 0;
+    double max_cap = this->capacity * 1.05;
+    
+    if (reserved > max_cap) this->reserved = (int)max_cap;
+    else if (reserved < 0) this->reserved = 0;
+    else this->reserved = reserved;
+}
+
+bool FlightBooking::reserveSeats(int number_of_seats) {
+    if (id == 0) return false;
+    double limit = capacity * 1.05;
+    if (number_of_seats > 0 && (reserved + number_of_seats) <= limit) {
+        reserved += number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+bool FlightBooking::cancelReservations(int number_of_seats) {
+    if (id == 0) return false;
+    if (number_of_seats > 0 && (reserved - number_of_seats) >= 0) {
+        reserved -= number_of_seats;
+        return true;
+    }
+    return false;
+}
+
+void FlightBooking::printStatus() {
+    if (id == 0) return;
+    double percentage = (capacity > 0) ? (double)reserved / capacity * 100 : 0;
+    cout << "Flight " << id << " : " << reserved << "/" << capacity 
+         << " (" << fixed << setprecision(2) << percentage << "%) seats reserved" << endl;
+}
+
+int main() {
+    FlightBooking booking[10];
+    string line;
+    string command;
+
+    while (true) {
+        cout << "What would you like to do?: ";
+        getline(cin, line);
+        
+        stringstream ss(line);
+        ss >> command;
+
+        if (command == "quit") break;
+
+        if (command == "create") {
+            int id, cap;
+            ss >> id >> cap;
+            bool success = false;
+            for (int i = 0; i < 10; i++) {
+                if (booking[i].getId() == 0) {
+                    booking[i] = FlightBooking(id, cap, 0);
+                    success = true;
+                    break;
+                }
+            }
+            if (!success) cout << "Cannot perform this operation: Table full" << endl;
+        } 
+        else if (command == "delete") {
+            int id;
+            ss >> id;
+            bool success = false;
+            for (int i = 0; i < 10; i++) {
+                if (booking[i].getId() == id) {
+                    booking[i] = FlightBooking(); // Очищуємо
+                    success = true;
+                    break;
+                }
+            }
+            if (!success) cout << "Cannot perform this operation: Flight not found" << endl;
+        }
+        else if (command == "add") {
+            int id, n;
+            ss >> id >> n;
+            bool success = false;
+            for (int i = 0; i < 10; i++) {
+                if (booking[i].getId() == id) {
+                    if (booking[i].reserveSeats(n)) success = true;
+                    break;
+                }
+            }
+            if (!success) cout << "Cannot perform this operation" << endl;
+        }
+        else if (command == "cancel") {
+            int id, n;
+            ss >> id >> n;
+            bool success = false;
+            for (int i = 0; i < 10; i++) {
+                if (booking[i].getId() == id) {
+                    if (booking[i].cancelReservations(n)) success = true;
+                    break;
+                }
+            }
+            if (!success) cout << "Cannot perform this operation" << endl;
+        }
+        else {
+            cout << "Unknown command" << endl;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            booking[i].printStatus();
+        }
+    }
+
+    return 0;
+}
