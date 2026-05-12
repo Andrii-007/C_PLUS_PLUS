@@ -17,6 +17,9 @@ private:
     int id;
     int capacity;
     int reserved;
+    int getMaxCap() {
+    return (capacity * 105) / 100;
+}
 };
 
 FlightBooking::FlightBooking() {
@@ -25,18 +28,24 @@ FlightBooking::FlightBooking() {
 
 FlightBooking::FlightBooking(int id, int capacity, int reserved) {
     this->id = id;
-    this->capacity = (capacity > 0) ? capacity : 0;
-    double max_cap = this->capacity * 1.05;
-    
-    if (reserved > max_cap) this->reserved = (int)max_cap;
-    else if (reserved < 0) this->reserved = 0;
-    else this->reserved = reserved;
+   if (capacity > 0) {
+    this->capacity = capacity;
+} else {
+    this->capacity = 0;
+}
+
+if (reserved > getMaxCap()) {
+    this->reserved = getMaxCap();
+} else if (reserved < 0) {
+    this->reserved = 0;
+} else {
+    this->reserved = reserved;
+    }
 }
 
 bool FlightBooking::reserveSeats(int number_of_seats) {
     if (id == 0) return false;
-    double limit = capacity * 1.05;
-    if (number_of_seats > 0 && (reserved + number_of_seats) <= limit) {
+    if (number_of_seats > 0 && (reserved + number_of_seats) <= getMaxCap()) {
         reserved += number_of_seats;
         return true;
     }
@@ -127,6 +136,7 @@ int main() {
             cout << "Unknown command" << endl;
         }
 
+        // Вивід статусів після кожної дії
         for (int i = 0; i < 10; i++) {
             booking[i].printStatus();
         }
