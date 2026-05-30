@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+
+// ==========================================
+// Базовий клас: IPAddress
+// ==========================================
+class IPAddress {
+protected:
+    std::string ip_value;
+
+public:
+    IPAddress(const std::string& ip) : ip_value(ip) {}
+    IPAddress(const IPAddress& other) : ip_value(other.ip_value) {}
+
+    virtual void print() const {
+        std::cout << "IP Address: " << ip_value;
+    }
+
+    virtual ~IPAddress() {}
+};
+
+// ==========================================
+// Похідний клас: IPAddressChecked
+// ==========================================
+class IPAddressChecked : public IPAddress {
+private:
+    bool is_correct;
+
+    // Приватний метод для повної валідації IPv4 адреси
+    bool validateIP(const std::string& ip) const {
+        std::stringstream ss(ip);
+        int num1, num2, num3, num4;
+        char ch1, ch2, ch3;
+
+        // Намагаємось розпарсити формат: число.число.число.число
+        if (ss >> num1 >> ch1 >> num2 >> ch2 >> num3 >> ch3 >> num4) {
+            // Перевіряємо, що роздільники — це саме крапки
+            if (ch1 == '.' && ch2 == '.' && ch3 == '.') {
+                // Перевіряємо діапазон для кожного октету (від 0 до 255)
+                if ((num1 >= 0 && num1 <= 255) &&
+                    (num2 >= 0 && num2 <= 255) &&
+                    (num3 >= 0 && num3 <= 255) &&
+                    (num4 >= 0 && num4 <= 255)) {
+                    
+                    // Перевіряємо, чи не залишилося в рядку зайвих символів після адреси
+                    std::string extra;
+                    if (!(ss >> extra)) {
+                        return true; 
+                    }
+                }
+            }
+        }
+        return false; // Якщо хоч одна умова не виконалась — адреса недійсна
+    }
+
+public:
+    // Конструктор тепер використовує метод валідації
+    IPAddressChecked(const std::string& ip) : IPAddress(ip) {
+        is_correct = validateIP(ip); 
+    }
+
+    // Конструктор копіювання
+    IPAddressChecked(const IPAddressChecked& other) 
+        : IPAddress(other), is_correct(other.is_correct) {}
+
+    void print() const override {
+        IPAddress::print(); 
+        std::cout << " | Status: " << (is_correct ? "Correct" : "Not Correct");
+    }
+};
+
+// ==========================================
+// Тестовий код (без векторів, з поліморфізмом)
+// ==========================================
+int main() {
+    std::string in1, in2, in3;
+
+    std::cout << "Enter IP for base IPAddress: ";
+    std::getline(std::cin, in1);
+    std::cout << "Enter IP for derived IPAddressChecked 1: ";
+    std::getline(std::cin, in2);
+    std::cout << "Enter IP for derived IPAddressChecked 2: ";
+    std::getline(std::cin, in3);
+
+    // Створення об'єктів
+    IPAddress baseObj(in1);
+    IPAddressChecked checkedObj1(in2);
+    
+    IPAddressChecked temp(in3);
+    IPAddressChecked checkedObj2(temp); // Виклик конструктора копіювання
+
+    std::cout << "\n--- Displaying Values Polymorphically ---\n";
+
+    // Масив вказівників на базовий клас для демонстрації поліморфізму
+    IPAddress* collection[3];
+    collection[0] = &baseObj;       
+    collection[1] = &checkedObj1;   
+    collection[2] = &checkedObj2;   
+
+    // Виведення результатів через спільний інтерфейс
+    for (int i = 0; i < 3; i++) {
+        collection[i]->print(); 
+        std::cout << std::endl; 
+    }
+
+    return 0;
+}
