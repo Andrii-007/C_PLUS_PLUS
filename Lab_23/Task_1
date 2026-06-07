@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <cmath>
+#include <numeric> // Для std::gcd (починаючи з C++17)
+
+using namespace std;
+
+class Fraction {
+public:
+    Fraction(int num, int den) {
+        if (den == 0) den = 1; // Захист від ділення на нуль
+        if (den < 0) { num = -num; den = -den; }
+        numerator = num;
+        denominator = den;
+        reduce();
+    }
+
+    string toString() const {
+        int whole = numerator / denominator;
+        int rem = abs(numerator % denominator);
+        stringstream ss;
+
+        if (whole != 0) ss << whole;
+        if (rem != 0) {
+            if (whole != 0) ss << " ";
+            ss << rem << "/" << denominator;
+        } else if (whole == 0) {
+            return "0";
+        }
+        return ss.str();
+    }
+
+    double toDouble() const {
+        return static_cast<double>(numerator) / denominator;
+    }
+
+    Fraction plus(Fraction that) const {
+        return Fraction(numerator * that.denominator + that.numerator * denominator,
+                        denominator * that.denominator);
+    }
+
+    Fraction minus(Fraction that) const {
+        return Fraction(numerator * that.denominator - that.numerator * denominator,
+                        denominator * that.denominator);
+    }
+
+    Fraction times(Fraction that) const {
+        return Fraction(numerator * that.numerator, denominator * that.denominator);
+    }
+
+    Fraction by(Fraction that) const {
+        return Fraction(numerator * that.denominator, denominator * that.numerator);
+    }
+
+private:
+    int numerator;
+    int denominator;
+
+    // Алгоритм Евкліда для скорочення
+    void reduce() {
+        int common = std::abs(gcd(numerator, denominator));
+        numerator /= common;
+        denominator /= common;
+    }
+
+    int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+};
+
+int main() {
+    int n1, d1, n2, d2;
+    char s1, s2;
+
+    if (cin >> n1 >> s1 >> d1 >> n2 >> s2 >> d2) {
+        Fraction f1(n1, d1), f2(n2, d2);
+
+        cout << "Sum: " << f1.plus(f2).toString() << endl;
+        cout << "Difference: " << f1.minus(f2).toString() << endl;
+        cout << "Product: " << f1.times(f2).toString() << endl;
+        cout << "Division: " << f1.by(f2).toString() << endl;
+    }
+    return 0;
+}
