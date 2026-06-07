@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <cmath>
+
+using namespace std;
+
+class Fraction {
+public:
+    Fraction(int num, int den) {
+        // Забезпечуємо, щоб знак завжди був у чисельнику
+        if (den < 0) {
+            num = -num;
+            den = -den;
+        }
+        numerator = num;
+        denominator = den;
+    }
+
+    string toString() {
+        int num = numerator;
+        int den = denominator;
+        bool isNegative = num < 0;
+        
+        // Працюємо з абсолютними значеннями для форматування
+        int absNum = abs(num);
+        int whole = absNum / den;
+        int remainder = absNum % den;
+
+        stringstream ss;
+        if (isNegative) ss << "-";
+
+        if (remainder == 0) {
+            ss << whole;
+        } else if (whole == 0) {
+            ss << remainder << "/" << den;
+        } else {
+            ss << whole << " " << remainder << "/" << den;
+        }
+        return ss.str();
+    }
+
+    double toDouble() {
+        return static_cast<double>(numerator) / denominator;
+    }
+
+private:
+    int numerator;
+    int denominator;
+};
+
+int main() {
+    int num, den;
+    char slash;
+    
+    // Зчитуємо вхідні дані формату "num / den"
+    if (cin >> num >> slash >> den) {
+        Fraction fraction(num, den);
+        cout << fraction.toString() << " is " << fraction.toDouble() << " in decimal" << endl;
+    } else {
+        cerr << "Invalid input format. Please use [numerator] / [denominator]" << endl;
+    }
+
+    return 0;
+}
