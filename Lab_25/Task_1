@@ -1,5 +1,7 @@
 #include <iostream>
 
+using namespace std;
+
 // ==========================================
 // Базовий клас: Tree (Спільний інтерфейс)
 // ==========================================
@@ -7,7 +9,7 @@ class Tree {
 public:
     // Віртуальний метод для малювання
     virtual void draw() const {
-        std::cout << "Base Tree" << std::endl;
+        cout << "Base Tree" << endl;
     }
 
     // Віртуальний деструктор для коректного очищення пам'яті
@@ -20,9 +22,9 @@ public:
 class SlashTree : public Tree {
 public:
     void draw() const override {
-        std::cout << "Drawing 1:\n";
-        std::cout << "  /\\\n";
-        std::cout << " //\\\\\n";
+        cout << "Drawing 1:\n";
+        cout << "  /\\\n";
+        cout << " //\\\\\n";
     }
 };
 
@@ -32,9 +34,9 @@ public:
 class StarTree : public Tree {
 public:
     void draw() const override {
-        std::cout << "Drawing 2:\n";
-        std::cout << "  /\\\n";
-        std::cout << " /**\\\n";
+        cout << "Drawing 2:\n";
+        cout << "  /\\\n";
+        cout << " /**\\\n";
     }
 };
 
@@ -44,9 +46,9 @@ public:
 class PlusTree : public Tree {
 public:
     void draw() const override {
-        std::cout << "Drawing 3:\n";
-        std::cout << "  /\\\n";
-        std::cout << " /++\\\n";
+        cout << "Drawing 3:\n";
+        cout << "  /\\\n";
+        cout << " /++\\\n";
     }
 };
 
@@ -67,12 +69,12 @@ int main() {
     forest[1] = &tree2;
     forest[2] = &tree3;
 
-    std::cout << "--- START POLYMORPHIC DRAWING ---\n\n";
+    cout << "--- START POLYMORPHIC DRAWING ---\n\n";
 
     // 4. Цикл 'for', який ітерує по масиву та викликає метод draw()
     for (int i = 0; i < 3; i++) {
         forest[i]->draw();
-        std::cout << "\n"; // Додатковий відступ між малюнками
+        cout << "\n"; // Додатковий відступ між малюнками
     }
 
     return 0;
