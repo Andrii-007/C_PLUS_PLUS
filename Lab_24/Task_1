@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <cmath>
+
+using namespace std;
+
+class Fraction {
+public:
+    Fraction(int numerator, int denominator) {
+        if (denominator == 0) denominator = 1;
+        if (denominator < 0) { numerator = -numerator; denominator = -denominator; }
+        this->numerator = numerator;
+        this->denominator = denominator;
+        reduce();
+    }
+
+    string toString() {
+        return to_string(numerator) + "/" + to_string(denominator);
+    }
+
+    double toDouble() {
+        return static_cast<double>(numerator) / denominator;
+    }
+
+    // Методи порівняння
+    bool isGreaterThan(Fraction that) {
+        return (long long)this->numerator * that.denominator > (long long)that.numerator * this->denominator;
+    }
+
+    bool isLessThan(Fraction that) {
+        return (long long)this->numerator * that.denominator < (long long)that.numerator * this->denominator;
+    }
+
+    bool isEqual(Fraction that) {
+        return this->numerator == that.numerator && this->denominator == that.denominator;
+    }
+
+private:
+    int numerator;
+    int denominator;
+
+    void reduce() {
+        int a = abs(numerator);
+        int b = abs(denominator);
+        while (b) {
+            a %= b;
+            swap(a, b);
+        }
+        numerator /= a;
+        denominator /= a;
+    }
+};
+
+int main() {
+    int n1, d1, n2, d2;
+    char s1, s2;
+
+    if (cin >> n1 >> s1 >> d1 >> n2 >> s2 >> d2) {
+        Fraction f1(n1, d1), f2(n2, d2);
+
+        cout << f1.toString() << " ";
+        if (f1.isEqual(f2)) cout << "==";
+        else if (f1.isGreaterThan(f2)) cout << ">";
+        else cout << "<";
+        cout << " " << f2.toString() << endl;
+    }
+    return 0;
+}
